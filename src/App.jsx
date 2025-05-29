@@ -1,9 +1,12 @@
 import "./App.css";
 import NewsApp from "./components/NewsApp";
+import { NewsProvider } from "./context/newsContext";
 function App() {
   return (
     <>
-      <NewsApp />
+      <NewsProvider>
+        <NewsApp />
+      </NewsProvider>
     </>
   );
 }

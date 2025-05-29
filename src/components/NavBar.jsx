@@ -1,22 +1,40 @@
+import { useContext, useState } from "react";
+import { NewsContext } from "../context/newsContext";
+
 const NavBar = () => {
+  const { setSearch } = useContext(NewsContext);
+  const [userInput, setUserInput] = useState("");
   const navNewsItems = ["Sports", "World", "India", "Madhya Pradesh", "Virat"];
+
+  const handleSearch = () => setSearch(userInput);
+  const handleNavClick = (item) => {
+    setSearch(item);
+    setUserInput(item);
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg"
       style={{
         position: "sticky",
         top: "0",
-        backgroundColor: "grey",
         zIndex: 100,
+        backgroundColor: "#1e1e2f",
+        padding: "10px 30px",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a
+          className="navbar-brand text-white fs-3 fw-bold"
+          href="#"
+          style={{ letterSpacing: "2px" }}
+        >
           The Rise
         </a>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler bg-light"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -24,29 +42,55 @@ const NavBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div
-          className="collapse navbar-collapse position-relative"
-          id="navbarSupportedContent"
-        >
-          <ul className="navbar-nav position-absolute start-50 translate-middle-x mb-2 mb-lg-0">
-            {navNewsItems.map((item, index) => {
-              return (
-                <li className="nav-item" key={index}>
-                  <a className="nav-link active" aria-current="page" href="#">
-                    {item}
-                  </a>
-                </li>
-              );
-            })}
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul
+            className="navbar-nav mx-auto mb-2 mb-lg-0"
+            style={{ gap: "20px" }}
+          >
+            {navNewsItems.map((item, index) => (
+              <li
+                className="nav-item"
+                key={index}
+                onClick={() => handleNavClick(item)}
+              >
+                <a
+                  className="nav-link text-white fw-semibold"
+                  style={{
+                    cursor: "pointer",
+                    transition: "color 0.3s",
+                  }}
+                >
+                  {item}
+                </a>
+              </li>
+            ))}
           </ul>
 
-          <div className="d-flex ms-auto" role="search">
+          <div className="d-flex" role="search">
             <input
               className="form-control me-2"
               type="search"
-              placeholder="Search"
+              placeholder="Search News"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              style={{
+                minWidth: "200px",
+                borderRadius: "20px",
+                padding: "6px 12px",
+              }}
             />
-            <button className="btn btn-outline-success">Search</button>
+            <button
+              className="btn"
+              onClick={handleSearch}
+              style={{
+                backgroundColor: "#00b894",
+                color: "white",
+                borderRadius: "20px",
+                padding: "6px 16px",
+              }}
+            >
+              Search
+            </button>
           </div>
         </div>
       </div>

@@ -1,3 +1,20 @@
+import NewsCard from "./NewsCard";
+import NavBar from "./NavBar";
+import Loader from "./Loader";
+import { useContext } from "react";
+import { NewsContext } from "../context/newsContext";
+const NewsApp = () => {
+  const { loading } = useContext(NewsContext);
+  return (
+    <>
+      <NavBar />
+      {loading ? <Loader /> : <NewsCard />}
+    </>
+  );
+};
+
+export default NewsApp;
+
 // import React, { useEffect, useState } from "react";
 // import NavBar from "./NavBar";
 // import NewsCard from "./NewsCard";
@@ -37,17 +54,3 @@
 // };
 
 // export default NewsApp;
-import NewsCard from "./NewsCard";
-import NavBar from "./NavBar";
-import Loader from "./Loader";
-const NewsApp = () => {
-  return (
-    <>
-      <NavBar />
-      <Loader />
-      <NewsCard />
-    </>
-  );
-};
-
-export default NewsApp;
