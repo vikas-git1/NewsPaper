@@ -1,0 +1,53 @@
+// import React, { useEffect, useState } from "react";
+// import NavBar from "./NavBar";
+// import NewsCard from "./NewsCard";
+// import Loader from "./Loader";
+// const NewsApp = () => {
+//   const [newsData, setNewsData] = useState([]);
+//   const [search, setSearch] = useState("india");
+//   const [loading, setLoading] = useState(false);
+//   const API_KEY = "9c3ed8ee95884dec979460a60f96675b";
+//   const getData = async () => {
+//     try {
+//       setLoading(true);
+//       let response = await fetch(
+//         `https://newsapi.org/v2/everything?q=${search}&apiKey=${API_KEY}`
+//       );
+//       let data = await response.json();
+//       if (data.articles) setNewsData(data.articles);
+//       else setNewsData([]);
+//     } catch (error) {
+//       "Error Occured: ", error;
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getData();
+//   }, [search]);
+//   // console.log(newsData);
+
+//   return (
+//     <>
+//       <NavBar setSearch={setSearch} initialSearch={search} />
+//       {loading ? <Loader /> : <NewsCard newsData={newsData} />}
+//     </>
+//   );
+// };
+
+// export default NewsApp;
+import NewsCard from "./NewsCard";
+import NavBar from "./NavBar";
+import Loader from "./Loader";
+const NewsApp = () => {
+  return (
+    <>
+      <NavBar />
+      <Loader />
+      <NewsCard />
+    </>
+  );
+};
+
+export default NewsApp;
