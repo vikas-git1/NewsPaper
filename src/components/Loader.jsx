@@ -4,7 +4,7 @@ const Loader = () => {
   return (
     <div className="d-flex justify-content-center mt-5">
       <div className="spinner-border text-primary" role="status">
-        <span className="">⭐</span>
+        <span className=""></span>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export const NewsProvider = ({ children }) => {
   const [newsData, setNewsdata] = useState([]);
   const [search, setSearch] = useState("India");
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const getData = async () => {
     try {
       setLoading(true);
@@ -30,7 +31,9 @@ export const NewsProvider = ({ children }) => {
     getData();
   }, [search]);
   return (
-    <NewsContext.Provider value={{ newsData, loading, setSearch }}>
+    <NewsContext.Provider
+      value={{ newsData, loading, setSearch, page, setPage }}
+    >
       {children}
     </NewsContext.Provider>
   );

@@ -4,14 +4,16 @@ import { NewsContext } from "../context/newsContext";
 const NavBar = () => {
   const { setSearch } = useContext(NewsContext);
   const [userInput, setUserInput] = useState("");
-  const navNewsItems = ["Sports", "World", "India", "Madhya Pradesh", "Virat"];
+  const navNewsItems = ["India", "Madhya Pradesh", "Sports", "Tech", "Virat"];
 
   const handleSearch = () => setSearch(userInput);
   const handleNavClick = (item) => {
     setSearch(item);
     setUserInput(item);
   };
-
+  const handleHome = () => {
+    setSearch("world");
+  };
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -20,7 +22,7 @@ const NavBar = () => {
         top: "0",
         zIndex: 100,
         backgroundColor: "#1e1e2f",
-        padding: "10px 30px",
+        padding: "20px 30px",
         boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
@@ -28,7 +30,14 @@ const NavBar = () => {
         <a
           className="navbar-brand text-white fs-3 fw-bold"
           href="#"
-          style={{ letterSpacing: "2px" }}
+          style={{
+            letterSpacing: "2px",
+            backgroundColor: "rgb(82, 81, 91)",
+            padding: "0px 10px",
+            borderRadius: "4px",
+            boxShadow: "0 8px 3px rgba(238, 238, 238, 0.1)",
+          }}
+          onClick={handleHome}
         >
           The Rise
         </a>
@@ -83,9 +92,9 @@ const NavBar = () => {
               className="btn"
               onClick={handleSearch}
               style={{
-                backgroundColor: "#00b894",
+                backgroundColor: "rgb(82, 81, 91)",
                 color: "white",
-                borderRadius: "20px",
+                borderRadius: "5px",
                 padding: "6px 16px",
               }}
             >
