@@ -4,16 +4,31 @@ import { NewsContext } from "../context/newsContext";
 const NavBar = () => {
   const { setSearch } = useContext(NewsContext);
   const [userInput, setUserInput] = useState("");
+  const [isNavOpen, setIsNavOpen] = useState(false); // new state
+
   const navNewsItems = ["India", "Madhya Pradesh", "Sports", "Tech", "Virat"];
 
   const handleSearch = () => setSearch(userInput);
+
   const handleNavClick = (item) => {
     setSearch(item);
     setUserInput(item);
+    setIsNavOpen(false); // close menu after click
   };
+
   const handleHome = () => {
     setSearch("world");
+    setIsNavOpen(false); // close menu after click
   };
+
+  const toggleNav = () => setIsNavOpen((prev) => !prev); // toggle menu
+
+  const toggleStyle = {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  };
+
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -30,6 +45,7 @@ const NavBar = () => {
         <a
           className="navbar-brand text-white fs-3 fw-bold"
           href="#"
+          onClick={handleHome}
           style={{
             letterSpacing: "2px",
             backgroundColor: "rgb(82, 81, 91)",
@@ -37,7 +53,6 @@ const NavBar = () => {
             borderRadius: "4px",
             boxShadow: "0 8px 3px rgba(238, 238, 238, 0.1)",
           }}
-          onClick={handleHome}
         >
           The Rise
         </a>
@@ -45,16 +60,21 @@ const NavBar = () => {
         <button
           className="navbar-toggler bg-light"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
+          onClick={toggleNav}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div
+          className={`collapse navbar-collapse ${isNavOpen ? "show" : ""}`}
+          id="navbarSupportedContent"
+        >
           <ul
             className="navbar-nav mx-auto mb-2 mb-lg-0"
-            style={{ gap: "20px" }}
+            style={{
+              gap: "20px",
+              ...(isNavOpen ? toggleStyle : {}),
+            }}
           >
             {navNewsItems.map((item, index) => (
               <li
@@ -77,6 +97,7 @@ const NavBar = () => {
 
           <div className="d-flex" role="search">
             <input
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               className="form-control me-2"
               type="search"
               placeholder="Search News"

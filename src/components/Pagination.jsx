@@ -27,6 +27,7 @@ const Pagination = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        overflow: "scroll",
       }}
     >
       <nav aria-label="Page navigation example">

@@ -15,7 +15,7 @@ export const NewsProvider = ({ children }) => {
       );
       let data = await response.json();
       //   data.articles ? setNewsdata(data.articles) : setNewsdata([]);
-      //   console.log("Data Recieved:", data.articles);
+      // console.log("Data Recieved:", data.totalResults);
       if (data.articles) {
         setNewsdata(data.articles);
       } else {
@@ -29,7 +29,8 @@ export const NewsProvider = ({ children }) => {
   };
   useEffect(() => {
     getData();
-  }, [search]);
+  }, [search, page]);
+
   return (
     <NewsContext.Provider
       value={{ newsData, loading, setSearch, page, setPage }}

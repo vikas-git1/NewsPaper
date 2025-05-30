@@ -1,130 +1,109 @@
 // src/components/NewsCard.jsimport { useContext } from "react";
 import { NewsContext } from "../context/newsContext";
 import { useContext } from "react";
-import Pagination from "./Pagination";
 const NewsCard = () => {
-  const { newsData } = useContext(NewsContext);
-  const { page } = useContext(NewsContext);
+  const { newsData, page } = useContext(NewsContext);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          width: "100vw",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "30px",
-          padding: "30px",
-          justifyContent: "center",
-          backgroundColor: "rgb(82, 81, 91)",
-        }}
-      >
-        {newsData.length === 0 ? (
-          <h3>No News Available</h3>
-        ) : (
-          newsData.slice(page * 8 - 8, page * 8).map((news, index) => {
-            let description =
-              typeof news.description === "string" ? news.description : "";
-            let descriptionWords = description.split(" ");
-            if (descriptionWords.length > 20) {
-              descriptionWords = descriptionWords.slice(0, 20);
-              descriptionWords.push("...");
-            }
+    <>
+      {newsData.length === 0 ? (
+        <h3>No News Available</h3>
+      ) : (
+        newsData.slice(page * 8 - 8, page * 8).map((news, index) => {
+          let description =
+            typeof news.description === "string" ? news.description : "";
+          let descriptionWords = description.split(" ");
+          if (descriptionWords.length > 20) {
+            descriptionWords = descriptionWords.slice(0, 20);
+            descriptionWords.push("...");
+          }
 
-            return (
-              <div
-                key={index}
+          return (
+            <div
+              key={index}
+              style={{
+                width: "320px",
+                height: "420px",
+                backgroundColor: "white",
+                borderRadius: "12px",
+                boxShadow: "13px 13px  6px rgba(0,0,0,0.1)",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                position: "relative",
+              }}
+            >
+              <img
+                src={news.urlToImage}
+                alt="News"
                 style={{
-                  width: "320px",
-                  height: "420px",
-                  backgroundColor: "white",
-                  borderRadius: "12px",
-                  boxShadow: "13px 13px  6px rgba(0,0,0,0.1)",
-                  overflow: "hidden",
+                  width: "100%",
+                  height: "180px",
+                  objectFit: "cover",
+                }}
+              />
+              <div
+                style={{
+                  padding: "15px",
                   display: "flex",
                   flexDirection: "column",
+                  flexGrow: 1,
                   position: "relative",
                 }}
               >
-                <img
-                  src={news.urlToImage}
-                  alt="News"
+                <h4
                   style={{
-                    width: "100%",
-                    height: "180px",
-                    objectFit: "cover",
-                  }}
-                />
-                <div
-                  style={{
-                    padding: "15px",
-                    display: "flex",
-                    flexDirection: "column",
-                    flexGrow: 1,
-                    position: "relative",
+                    color: "#888",
+                    fontSize: "14px",
+                    marginBottom: "6px",
                   }}
                 >
-                  <h4
-                    style={{
-                      color: "#888",
-                      fontSize: "14px",
-                      marginBottom: "6px",
-                    }}
-                  >
-                    Source: {news.source.name}
-                  </h4>
-                  <h5
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "600",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {news.title}
-                  </h5>
-                  <p
-                    style={{
-                      fontSize: "14px",
-                      color: "#333",
-                      marginBottom: "45px", // leave space for the button
-                    }}
-                  >
-                    {descriptionWords.join(" ")}
-                  </p>
-                  <a
-                    href={news.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      position: "absolute",
-                      bottom: "15px",
-                      left: "15px",
-                      right: "15px",
-                      textAlign: "center",
-                      backgroundColor: "#007bff",
-                      color: "white",
-                      padding: "10px 0",
-                      borderRadius: "6px",
-                      textDecoration: "none",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Read More
-                  </a>
-                </div>
+                  Source: {news.source.name}
+                </h4>
+                <h5
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    marginBottom: "10px",
+                  }}
+                >
+                  {news.title}
+                </h5>
+                <p
+                  style={{
+                    fontSize: "14px",
+                    color: "#333",
+                    marginBottom: "45px", // leave space for the button
+                  }}
+                >
+                  {descriptionWords.join(" ")}
+                </p>
+                <a
+                  href={news.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    position: "absolute",
+                    bottom: "15px",
+                    left: "15px",
+                    right: "15px",
+                    textAlign: "center",
+                    backgroundColor: "#007bff",
+                    color: "white",
+                    padding: "10px 0",
+                    borderRadius: "6px",
+                    textDecoration: "none",
+                    fontWeight: "500",
+                  }}
+                >
+                  Read More
+                </a>
               </div>
-            );
-          })
-        )}
-      </div>
-      <Pagination />
-    </div>
+            </div>
+          );
+        })
+      )}
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ function App() {
         <NewsApp />
       </NewsProvider>
       {/* News Web App
-A React.js-based news application that fetches real-time headlines using an API. Implemented search, category filters, and global state management using Context API. Mobile-responsive and deployed on Vercel. */}
+A mobile-responsive news application built with React.js, Bootstrap, and Context API. Integrated NewsAPI to fetch real-time articles. Features include keyword search, category-based filtering, client-side pagination, loading indicators, and global state management.*/}
     </>
   );
 }
